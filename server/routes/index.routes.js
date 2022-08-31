@@ -1,12 +1,14 @@
 import { Router } from 'express';
-import { pool } from '../db.js'
+import { getCategory, getCategoryById, getProducts, getProductsByCategory } from '../controllers/products.contoller.js';
 
 const router = Router();
 
-router.get('/products', async(req, res) => {
-    const [ rows ] = await pool.query('SELECT * FROM product');
-    console.log(rows)
-    res.json(rows)
-});
+router.get('/products', getProducts);
+router.get('/products/:category', getProductsByCategory)
+
+
+
+router.get('/category', getCategory);
+router.get('/category/:id', getCategoryById)
 
 export default router;

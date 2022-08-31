@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 
 <head>
     <meta charset="UTF-8">
@@ -36,30 +36,39 @@
                 </ul>
             </div>
 
-            <form action="">
-                <input 
-                    class="form-control me-2"
-                    type="text" 
-                    placeholder="Buscar producto"
-                >
-            </form>
-            
+
+
             <button class="btn btn-outline-success" type="button" onClick="pay()">Pagar</button>
         </div>
     </nav>
 
-
-
-
-    <main class="container">
     
+    <main class="container">
+
         <div class="content-container justify-content-center">
             <h2 class="content-title text-center">Nuestros Productos</h2>
+
+            <div class="d-flex justify-content-center">
+                <form class="container my-3">
+                    <input class="form-control me-2 w-25" type="text" placeholder="Buscar producto">
+                </form>
+
+                <div class="dropdown">
+                    <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown"
+                        aria-expanded="false">
+                        Categorías
+                    </button>
+                    <ul class="dropdown-menu list-category">
+
+                    </ul>
+                </div>
+            </div>
+
             <div class="underline"></div>
             <div class="buttons-container"></div>
             <div class="products-container row shadow justify-content-center mt-4 p-4 mb-4"></div>
         </div>
-        
+
     </main>
 
 
