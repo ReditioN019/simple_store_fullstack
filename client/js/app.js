@@ -1,66 +1,51 @@
-let products1 = [];
-let total = 0;
+const searchProduct = document.querySelector('#buscar-producto');
+const productsList = document.querySelector('#products');
+const categoryList = document.querySelector("#category-list");
 
-function addProduct(product, price) {
-    console.log("Esto se agrega al carro");
-    // products1.push(product);
-    // total += price
-    // document.getElementById("checkout").innerHTML = `Pagar ${total}`
-}
+let products = [];
 
-function pay() {
-    window.alert(products1.join(", \n"));
-}
+window.addEventListener('DOMContentLoaded', async() => {
 
+    productsList.innerHTML = '<h1>Loading...</h1>'
 
-
-const fetchCategories = async () => {
-    const resp = await fetch('http://localhost:4000/category');
-    const categories = await resp.json();
-    return categories
-}
-fetchCategories().then(categories => {
-    displayCategories(categories);
-});
+    //!Obtengo las categorias
+    const categoriesData = await loadCategories();
+    renderCategories(categoriesData);//!Muestro las categorias en el boton
 
 
 
-const allProducts = async( id ) => {
+    //!Cargo los productos
+    const data = await loadProducts();
+    //!Los productos (data) los asigno al array de productos que se mostraran en pantalla
+    products = data;
+    renderProducts(products);
+})
 
-    const url = ''
+searchProduct.addEventListener('keyup', e => {
+    const productsFiltered = products.filter(product => (
+        product.name.toLowerCase().includes(searchProduct.value.toLowerCase()))
+    )
+    renderProducts(productsFiltered);
+})
 
+async function loadProducts(){
     const resp = await fetch('http://localhost:4000/products');
-    const products = await resp.json();
-    return products;
+    return await resp.json();
 }
-allProducts().then(products => {
-    displayProducts(products)
-});
 
+const createProductsItems = products => products.map(product => {
+    const { name, price, url_image } = product;
 
-
-
-const btns = document.querySelector('.btns-container')
-const products = document.querySelector('.products-container')
-const categories = document.querySelector('.list-category')
-
-
-
-const displayProducts = (allProduct) => {
-    let displayProduct = allProduct.map((item) => {
-
-        const {name, price, url_image} = item;
-
-        return `   
-          <div class="col-12 col-md-6 col-lg-3  mt-2 product">
-             <div class="card shadow">
+    return `   
+            <div class="col-12 col-md-6 col-lg-3  mt-2 product">
+                <div class="card shadow">
                 <div class="card-header">
-                   <img src="${url_image}" width="100%" height="200" alt="" class=" image mt-5 mb-5">
+                    <img src="${url_image}" width="100%" height="200" alt="" class=" image mt-5 mb-5">
                 </div>
                 <div class="card-body">
-                   <h6 class="card-title m-0 mb-2 text-success">${name}</h6>
+                    <h6 class="card-title m-0 mb-2 text-success">${name}</h6>
 
-                   <div class="d-flex justify-content-between align align-items-center">
+                    <div class="d-flex justify-content-between align align-items-center">
                     <h3 class="mt-2 price">$${price}</h3>
                     <button 
                         class="btn btn-primary" 
@@ -68,31 +53,47 @@ const displayProducts = (allProduct) => {
                     >
                         <i class="fa-solid fa-cart-shopping cart"></i>
                     </button>  
-                   </div>
+                    </div>
                 </div>
-             </div>
-          </div>
-       `;
-    })
-    displayProduct = displayProduct.join('')
-    products.innerHTML = displayProduct
-}
+                </div>
+            </div>
+    `;
+}).join('');
 
-//! Aqui se almacenan todos los productos de la categoria seleccionada
-let selectedCategory = [];
-
-const categorySelected = async(idCategory) => {
-    const resp = await fetch(`http://localhost:4000/category/${idCategory}`);
-    const categories = await resp.json();
-    return categories
+function renderProducts(products){
+    const itemString = createProductsItems(products);
+    productsList.innerHTML = itemString
 }
 
 
-const displayCategories = (allCategories) => {
-    let displayCategories = allCategories.map((item) => {
-        return `
-            <li><a class="dropdown-item"onClick="categorySelected(${item.id})">${item.name}</a></li>     `
-    })
-    displayCategories = displayCategories.join('');
-    categories.innerHTML = displayCategories;
+//!-----------------------------------------------------
+//!-----------------CATEGORIAS--------------------------
+//!-----------------------------------------------------
+
+async function loadCategories(){
+    const resp = await fetch('http://localhost:4000/category');
+    return await resp.json();
+    
+}
+
+
+const displayCategories = (categories) => categories.map((item) => {
+    return `
+        <li>
+            <a id="category" class="dropdown-item category"onClick="allProducts(${item.id})">${item.name}</a>   
+        </li>     
+    `
+}).join('');
+
+
+async function allProducts(id){
+    const resp = await fetch(`http://localhost:4000/category/${id}`);
+    const data =  await resp.json();
+    products = data;
+    renderProducts(products);
+}
+
+function renderCategories(categories){
+    const itemString = displayCategories(categories);
+    categoryList.innerHTML = itemString;
 }
