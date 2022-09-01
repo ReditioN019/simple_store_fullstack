@@ -34,6 +34,15 @@ export const getCategoryById = async(req, res) => {
     }
 }
 
+export const searchProduct = async(req, res) => {
+    const payload = req.body.payload.trim();
+    const [ rows ] = await pool.query(`
+        SELECT * FROM product WHERE name like '%${payload}%'
+    `)
+    res.send({payload: rows})
+}
+
+
 //!Envío el producto basado en la id de categoría recibida
 export const getProductsById = async(req, res) => {
     try {

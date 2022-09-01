@@ -1,10 +1,12 @@
 import { Router } from 'express';
-import { getCategory, getCategoryById, getProducts, getProductsByCategory } from '../controllers/products.contoller.js';
+import { getCategory, getCategoryById, getProducts, getProductsByCategory, searchProduct } from '../controllers/products.contoller.js';
 
 const router = Router();
 
 router.get('/products', getProducts);
-router.get('/products/:category', getProductsByCategory)
+router.get('/products/:category', getProductsByCategory);
+
+router.post('/products', searchProduct);
 
 
 

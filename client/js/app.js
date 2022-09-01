@@ -1,6 +1,7 @@
 const searchProduct = document.querySelector('#buscar-producto');
 const productsList = document.querySelector('#products');
 const categoryList = document.querySelector("#category-list");
+const searchMessage = document.querySelector('#search-message');
 
 let products = [];
 
@@ -19,13 +20,19 @@ window.addEventListener('DOMContentLoaded', async() => {
     //!Los productos (data) los asigno al array de productos que se mostraran en pantalla
     products = data;
     renderProducts(products);
-})
+});
+
 
 searchProduct.addEventListener('keyup', e => {
-    const productsFiltered = products.filter(product => (
-        product.name.toLowerCase().includes(searchProduct.value.toLowerCase()))
-    )
-    renderProducts(productsFiltered);
+
+    fetch('http://localhost:4000/products', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({payload: e.target.value})
+    }).then(res => res.json()).then(data => {
+        let payload = data.payload;
+        renderProducts(payload);
+    });
 })
 
 async function loadProducts(){
@@ -97,3 +104,5 @@ function renderCategories(categories){
     const itemString = displayCategories(categories);
     categoryList.innerHTML = itemString;
 }
+
+

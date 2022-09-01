@@ -50,10 +50,15 @@
 
             <ol>
                 <li>Falta opción de mostrar TODOS los productos nuevamente</li>
+                <li>Ordenar productos (por precio mayor a menor y menor a mayor, por nombre y por stock {si es que quiero})</li>
+                <li>MODULARIZAR CODIGO Y OPTIMIZAR LO MÁS POSIBLE</li>
+                <li>try catch en peticiones fetch</li>
             </ol>
 
             <div class="d-flex justify-content-between">
+
                 <input id="buscar-producto" class="form-control me-2 w-25" type="text" placeholder="Buscar producto">
+                <p id="search-message"></p>
 
                 <div class="dropdown">
                     <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown"
@@ -68,7 +73,7 @@
             <div class="underline"></div>
             <div class="buttons-container"></div>
             <div id="products" class="row shadow justify-content-center mt-4 p-4 mb-4"></div>
-            <!-- <div id="products" class="products-container row shadow justify-content-center mt-4 p-4 mb-4"></div> -->
+
         </div>
 
     </main>
