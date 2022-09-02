@@ -49,9 +49,8 @@
             <h2 class="content-title text-center">Nuestros Productos</h2>
 
             <ol>
-                <li>OPTIMIZAR BACKEND</li>
-                <li>ver error al contectar a bd. Controlar</li>
-                <li>Ordenar productos (por precio mayor a menor y menor a mayor, por nombre y por stock {si es que quiero})</li>
+                <li>Poner el punto del PRECIO!</li>
+                <li>Hacer el tema de pagar pero que abra un modal con los elementos que se van a pagar y dejarlos ahí. Terminalos con buen detalle y era.</li>
             </ol>
 
             <div class="d-flex justify-content-between">
@@ -66,6 +65,40 @@
                     </button>
 
                     <ul id="category-list" class="dropdown-menu"></ul>
+                </div>
+                <div class="dropdown">
+                    <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown"
+                        aria-expanded="false">
+                        Ordenar por:
+                    </button>
+
+                    <ul class="dropdown-menu">
+                        <li>
+                            <a class="dropdown-item category" onClick="sortProducts('low_to_high')">
+                                Precio: Menor a Mayor
+                            </a>   
+                        </li> 
+                        <li>
+                            <a class="dropdown-item category" onClick="sortProducts('high_to_low')">
+                                Precio: Mayor a Menor
+                            </a>   
+                        </li> 
+                        <li>
+                            <a class="dropdown-item category" onClick="sortProducts('nameAZ')">
+                                Nombre A - Z
+                            </a>   
+                        </li> 
+                        <li>
+                            <a class="dropdown-item category" onClick="sortProducts('nameZA')">
+                                Nombre Z - A
+                            </a>   
+                        </li> 
+                        <li>
+                            <a class="dropdown-item category" onClick="sortProducts('discount')">
+                                Descuento
+                            </a>   
+                        </li> 
+                    </ul>
                 </div>
             </div>
 

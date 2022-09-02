@@ -4,6 +4,8 @@ const categoryList = document.querySelector("#category-list");
 const searchMessage = document.querySelector('#search-message');
 
 
+let arrayProducts = [];
+//Carga Inicial
 window.addEventListener('DOMContentLoaded', async() => {
 
     renderLoadSpinner();
@@ -14,5 +16,64 @@ window.addEventListener('DOMContentLoaded', async() => {
 
     //!Carga inicial de los productos
     const productsData = await loadProducts();
-    renderProducts(productsData);
+    arrayProducts = productsData
+    renderProducts(arrayProducts);
 });
+
+
+const sortProducts = (value) => {
+
+    if(value === 'low_to_high'){
+        const products = arrayProducts.sort((a,b) => {
+            if(a.price > b.price){
+                return 1
+            }
+            return -1
+        })
+
+        renderProducts(products)
+    }
+    if(value === 'high_to_low'){
+        const products = arrayProducts.sort((a,b) => {
+            if(a.price < b.price){
+                return 1
+            }
+            return -1
+        })
+
+        renderProducts(products)
+    }
+
+    if(value === 'nameAZ'){
+        const products = arrayProducts.sort((a,b) => {
+            if(a.name > b.name){
+                return 1
+            }
+            return -1
+        })
+
+        renderProducts(products)
+    }
+    if(value === 'nameZA'){
+        const products = arrayProducts.sort((a,b) => {
+            if(a.name < b.name){
+                return 1
+            }
+            return -1
+        })
+
+        renderProducts(products)
+    }
+
+    if(value === 'discount'){
+        const products = arrayProducts.sort((a,b) => {
+            if(a.discount < b.discount){
+                return 1
+            }
+            return -1
+        })
+
+        renderProducts(products)
+    }
+
+}

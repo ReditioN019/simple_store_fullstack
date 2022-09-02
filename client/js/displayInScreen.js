@@ -8,7 +8,7 @@ const displayCategories = (categories) => categories.map((item) => (
 
 
 const createProductsItems = products => products.map(product => {
-    const { name, price, url_image } = product;
+    const { name, price, url_image, discount } = product;
     return `   
             <div class="col-12 col-md-6 col-lg-3  mt-2 product">
                 <div class="card shadow">
@@ -17,6 +17,11 @@ const createProductsItems = products => products.map(product => {
                 </div>
                 <div class="card-body">
                     <h6 class="card-title m-0 mb-2 text-success">${name}</h6>
+                    <p class="">
+                        ${
+                            discount === 0 ? '' : discount+"%"
+                        }
+                    </p>
                     <div class="d-flex justify-content-between align align-items-center">
                     <h3 class="mt-2 price">$${price}</h3>
                     <button 
@@ -35,12 +40,14 @@ const createProductsItems = products => products.map(product => {
 
 const productsByCategory = async(id) => {
     const productsByCategory = await loadProductsByCategory(id);
+    arrayProducts = productsByCategory
     renderProducts(productsByCategory);
 }
 
 const allProducts = async() => {
     const allProducts = await loadProducts();
-    renderProducts(allProducts);
+    arrayProducts = allProducts
+    renderProducts(arrayProducts);
 }
 
 //!=================================================
@@ -57,7 +64,7 @@ const renderLoadSpinner = () => {
 }
 
 const renderProducts = (products) => {
-    const itemString = createProductsItems(products);
+    const itemString = createProductsItems(arrayProducts);
     productsList.innerHTML = itemString;
 }
 
