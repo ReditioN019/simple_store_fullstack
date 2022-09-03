@@ -12,37 +12,18 @@
 
 <body>
 
-    <nav class="navbar navbar-expand-lg bg-light">
+    <nav class="navbar  bg-light">
         <div class="container-fluid">
-            <a class="navbar-brand" href="#">Navbar</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav">
-                    <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="#">Home</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Features</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Pricing</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link disabled">Disabled</a>
-                    </li>
-                </ul>
-            </div>
-
-
+            <a class="navbar-brand" target="_blank" href="https://www.bsale.cl/">
+                <img src="./assets/logo.png" alt="Logo">
+            </a>
+         
 
             <button class="btn btn-outline-success" type="button" onClick="pay()">Pagar</button>
         </div>
     </nav>
 
-    
+
     <main class="container">
 
         <div class="content-container justify-content-center">
@@ -50,56 +31,65 @@
 
             <ol>
                 <li>Poner el punto del PRECIO!</li>
-                <li>Hacer el tema de pagar pero que abra un modal con los elementos que se van a pagar y dejarlos ahí. Terminalos con buen detalle y era.</li>
+                <li>Ordenar código frontend en general (SORT)</li>
+                <li>Hacer el tema de pagar pero que abra un modal con los elementos que se van a pagar y dejarlos ahí.
+                    Terminalos con buen detalle y era.</li>
             </ol>
 
             <div class="d-flex justify-content-between">
+                <div>
+                    <input id="buscar-producto" class="form-control me-2 " type="text" placeholder="Buscar producto">
+                    <div id="error-search"  class="form-text text-danger"></div>
 
-                <input id="buscar-producto" class="form-control me-2 w-25" type="text" placeholder="Buscar producto">
-                <p id="search-message"></p>
-
-                <div class="dropdown">
-                    <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown"
-                        aria-expanded="false">
-                        Categorías
-                    </button>
-
-                    <ul id="category-list" class="dropdown-menu"></ul>
                 </div>
-                <div class="dropdown">
-                    <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown"
-                        aria-expanded="false">
-                        Ordenar por:
-                    </button>
 
-                    <ul class="dropdown-menu">
-                        <li>
-                            <a class="dropdown-item category" onClick="sortProducts('low_to_high')">
-                                Precio: Menor a Mayor
-                            </a>   
-                        </li> 
-                        <li>
-                            <a class="dropdown-item category" onClick="sortProducts('high_to_low')">
-                                Precio: Mayor a Menor
-                            </a>   
-                        </li> 
-                        <li>
-                            <a class="dropdown-item category" onClick="sortProducts('nameAZ')">
-                                Nombre A - Z
-                            </a>   
-                        </li> 
-                        <li>
-                            <a class="dropdown-item category" onClick="sortProducts('nameZA')">
-                                Nombre Z - A
-                            </a>   
-                        </li> 
-                        <li>
-                            <a class="dropdown-item category" onClick="sortProducts('discount')">
-                                Descuento
-                            </a>   
-                        </li> 
-                    </ul>
+                <div class="d-flex">
+                    <div class="dropdown mx-3">
+                        <button class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown"
+                            aria-expanded="false">
+                            Categorías
+                        </button>
+
+                        <ul id="category-list" class="dropdown-menu"></ul>
+                    </div>
+
+
+                    <div class="dropdown">
+                        <button class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown"
+                            aria-expanded="false">
+                            Ordenar por:
+                        </button>
+
+                        <ul class="dropdown-menu">
+                            <li>
+                                <a class="dropdown-item category" onClick="sortLowToHigh()">
+                                    Precio: Menor a Mayor
+                                </a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item category" onClick="sortHighToLow()">
+                                    Precio: Mayor a Menor
+                                </a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item category" onClick="sortNameAZ()">
+                                    Nombre A - Z
+                                </a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item category" onClick="sortNameZA()">
+                                    Nombre Z - A
+                                </a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item category" onClick="sortForDiscount()">
+                                    Descuento
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
+
             </div>
 
             <div class="underline"></div>
@@ -115,6 +105,7 @@
     <script src="js/main.js"></script>
     <script src="js/fetch.js"></script>
     <script src="js/displayInScreen.js"></script>
+    <script src="js/orderProducts.js"></script>
 </body>
 
 </html>

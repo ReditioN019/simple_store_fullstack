@@ -78,3 +78,16 @@ const renderCategories = (categories) => {
     `);
     categoryList.innerHTML = item.join('');
 }
+
+
+const renderError = () => {
+    productsList.innerHTML =  `
+        <div class="alert alert-danger" role="alert">
+            <h2 class="text-center">Error al cargar datos</h2>
+        </div>
+    `;
+}
+
+const searchError = () => {
+    errorSearch.innerHTML = "En estos momentos no se puede realizar la búsqueda"
+}
